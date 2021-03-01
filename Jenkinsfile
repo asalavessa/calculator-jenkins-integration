@@ -32,7 +32,7 @@ pipeline {
 
         stage("store artifact on Nexus") {
             steps{
-                archiveArtifacts artifacts: '/var/jenkins_home/workspace/java-calculator-nexus/"$JAR_NAME".jar'
+                //archiveArtifacts artifacts: '/var/jenkins_home/workspace/java-calculator-nexus/"$JAR_NAME".jar'
                 sh 'curl -v -u admin:admin --upload-file /var/jenkins_home/workspace/java-calculator-nexus/"$JAR_NAME".jar http://nexus:8081/repository/my-raw/'
             }
         }
