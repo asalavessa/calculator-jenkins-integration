@@ -25,7 +25,7 @@ pipeline {
         stage("Build Jar"){
             steps{
                 sh 'javac *.java'
-                sh 'jar cfe "$JAR_NAME.jar exercicio6.class *.class'
+                sh 'jar cfe "$JAR_NAME".jar exercicio6.class *.class'
 
             }
         }
