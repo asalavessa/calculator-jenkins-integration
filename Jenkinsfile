@@ -48,7 +48,7 @@ pipeline {
             steps {
                 sh 'docker login -u admin -p admin localhost:8082'
                 sh 'docker tag "$IMAGE_NAME":v1.0 localhost:8082/"$IMAGE_NAME":v1.0'
-                sh 'docker push localhost:8082/"$IMAGE_NAME":latest'
+                sh 'docker push localhost:8082/"$IMAGE_NAME":v1.0'
 
             }
         }
