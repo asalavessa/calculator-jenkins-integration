@@ -1,4 +1,5 @@
 pipeline {
+    agent any
     parameters {
 
         string(name: 'IMAGE_NAME', defaultValue:'java-calculator', description:'Name of the Image')
