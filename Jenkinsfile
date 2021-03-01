@@ -32,11 +32,11 @@ pipeline {
 
         stage("store artifact on Nexus") {
             steps{
-                //archiveArtifacts artifacts: '/var/jenkins_home/workspace/java-calculator-nexus/"$JAR_NAME".jar'
-                sh 'curl -v -u admin:admin --upload-file /var/jenkins_home/workspace/java-calculator-nexus/"$JAR_NAME".jar http://nexus:8081/repository/my-raw/'
+                withCredentials([usernameColonPassword(credentialsId: 'curl-jenkinsfile-uploadArt-nexus', variable: 'USERPASS')]) {
+                sh 'curl -v -u "$USERPASS" --upload-file /var/jenkins_home/workspace/java-calculator-nexus/"$JAR_NAME".jar http://nexus:8081/repository/my-raw/'
             }
         }
-
+        }
 
         stage('Create Docker Image') {
             steps {
@@ -46,7 +46,8 @@ pipeline {
 
         stage('Push Image to Nexus') {
             steps {
-                sh 'docker login -u admin -p admin localhost:8082'
+                withCredentials(['UsernamePasswordMultiBinding'(credentialsId: usernameVariable: 'USERNAME', passwordvariable: 'PASSWORD')]) {
+                sh 'docker login -u "$USERNAME" -p "$PASSWORD" localhost:8082'
                 sh 'docker tag "$IMAGE_NAME":v1.0 localhost:8082/"$IMAGE_NAME":v1.0'
                 sh 'docker push localhost:8082/"$IMAGE_NAME":v1.0'
 
