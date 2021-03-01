@@ -36,7 +36,7 @@ pipeline {
                 sh 'curl -v -u "$USERPASS" --upload-file /var/jenkins_home/workspace/java-calculator-nexus/"$JAR_NAME".jar http://nexus:8081/repository/my-raw/'
             }
         }
-        }
+    }
 
         stage('Create Docker Image') {
             steps {
@@ -53,7 +53,7 @@ pipeline {
 
             }
         }
-        
+    }
                 stage('Clear WorkSpace') {
             steps {
                 cleanWs()
