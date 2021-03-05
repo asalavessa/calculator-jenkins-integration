@@ -73,9 +73,11 @@ pipeline {
                   sh "${scannerHome}/bin/sonar-scanner"
         }
               else {
-                  sh "${scannerHome}/bin/sonar-scanner -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=a085b053df4f603889a86a98be4c1d8bb299a69d -Dsonar.projectKey=java-calculator -Dsonar.java.binaries=/var/jenkins_home/workspace/java-calculator-nexus -Dsonar.java.libraries=**/*.jar -Dsonar.projectVersion=${BUILD_NUMBER}"
+                withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR')]){
+                  sh "${scannerHome}/bin/sonar-scanner -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=$SONAR -Dsonar.projectKey=java-calculator -Dsonar.java.binaries=/var/jenkins_home/workspace/java-calculator-nexus -Dsonar.java.libraries=**/*.jar -Dsonar.projectVersion=${BUILD_NUMBER}"
         }
     }
+}
    // timeout(time: 10, unit: 'MINUTES') {
      //   waitForQualityGate abortPipeline: true
     //}
