@@ -78,7 +78,7 @@ pipeline {
                   sh "${scannerHome}/bin/sonar-scanner"
         }
               else {
-                  sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${projectKey} -Dsonar.java.binaries=/var/jenkins_home/workspace/java-calculator-nexus -Dsonar.java.libraries=**/*.jar -Dsonar.projectVersion=${BUILD_NUMBER}"
+                  sh "${scannerHome}/bin/sonar-scanner -Dsonar.host.url=http://sonarqube:9000 -Dsonar.projectKey=${projectKey} -Dsonar.java.binaries=/var/jenkins_home/workspace/java-calculator-nexus -Dsonar.java.libraries=**/*.jar -Dsonar.projectVersion=${BUILD_NUMBER}"
         }
     }
     timeout(time: 10, unit: 'MINUTES') {
