@@ -71,7 +71,7 @@ pipeline {
 }
 
 
-{
+
         def sonarScanner(projectKey) {
         def scannerHome = tool 'sonarqube-scanner'
           withSonarQubeEnv("sonarqube") {
@@ -85,4 +85,3 @@ pipeline {
     timeout(time: 10, unit: 'MINUTES') {
         waitForQualityGate abortPipeline: true
     }
-}
