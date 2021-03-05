@@ -6,7 +6,7 @@ pipeline {
 
         string(name: 'JAR_NAME', defaultValue:'calculadora', description:'Name of the .jar file')
 
-        integer(name: 'BUILD_NUMBER', defaultValue: 1.0, description: 'Build Number')
+        string(name: 'BUILD_NUMBER', defaultValue: "1.0", description: 'Build Number')
 
         //string(name: 'CONTAINER_NAME', defaultValue: 'java-mvn', description:'Docker Container Name')
 
