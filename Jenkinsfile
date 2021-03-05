@@ -71,7 +71,7 @@ pipeline {
 
 
 
-        def sonarScanner(projectKey) {
+        def sonarScanner(java-calculator) {
         def scannerHome = tool 'sonarqube-scanner'
           withSonarQubeEnv("sonarqube") {
               if(fileExists("sonar-project.properties")) {
