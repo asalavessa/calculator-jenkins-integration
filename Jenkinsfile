@@ -12,7 +12,14 @@ pipeline {
     }
         
     stages{
-        
+
+        stage("Build Jar"){
+            steps{
+                sh 'javac *.java'
+                sh 'jar cfe "$JAR_NAME".jar Calculator *.class'
+
+        }
+    }   
 
         stage("SonarQube analysis") {
 
@@ -29,14 +36,6 @@ pipeline {
             //}
         //}
         //}
-
-        stage("Build Jar"){
-            steps{
-                sh 'javac *.java'
-                sh 'jar cfe "$JAR_NAME".jar Calculator *.class'
-
-            }
-        }
 
         stage("store artifact on Nexus") {
             steps{
