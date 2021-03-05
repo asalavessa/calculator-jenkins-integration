@@ -13,8 +13,29 @@ pipeline {
         
     stages{
         
+        def sonarScanner(projectKey) {
+        def scannerHome = tool 'sonarqube-scanner'
+          withSonarQubeEnv("sonarqube") {
+              if(fileExists("sonar-project.properties")) {
+                  sh "${scannerHome}/bin/sonar-scanner"
+        }
+              else {
+                  sh "${scannerHome}/bin/sonar-scanner -     Dsonar.projectKey=${projectKey} -Dsonar.java.binaries=build/classes -Dsonar.java.libraries=**/*.jar -Dsonar.projectVersion=${BUILD_NUMBER}"
+        }
+    }
+    timeout(time: 10, unit: 'MINUTES') {
+        waitForQualityGate abortPipeline: true
+    }
+}
 
-        //stage("build & SonarQube analysis") {
+        stage("SonarQube analysis") {
+
+            steps {
+        script {
+            sonarScanner('category-service')
+        }
+    }
+            
             //steps {
               //withSonarQubeEnv('sonarqube') {
                 //sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://sonarqube:9000'
