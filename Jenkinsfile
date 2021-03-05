@@ -81,7 +81,7 @@ pipeline {
                   sh "${scannerHome}/bin/sonar-scanner -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=a085b053df4f603889a86a98be4c1d8bb299a69d -Dsonar.projectKey=${projectKey} -Dsonar.java.binaries=/var/jenkins_home/workspace/java-calculator-nexus -Dsonar.java.libraries=**/*.jar -Dsonar.projectVersion=${BUILD_NUMBER}"
         }
     }
-    timeout(time: 10, unit: 'MINUTES') {
-        waitForQualityGate abortPipeline: true
-    }
+   // timeout(time: 10, unit: 'MINUTES') {
+     //   waitForQualityGate abortPipeline: true
+    //}
 }
