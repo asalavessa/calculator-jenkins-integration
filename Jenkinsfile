@@ -34,6 +34,7 @@ pipeline {
             sonarScanner('category-service')
         }
     }
+}
             
             //steps {
               //withSonarQubeEnv('sonarqube') {
@@ -80,4 +81,5 @@ pipeline {
             }
         }
     } 
+}
 }
