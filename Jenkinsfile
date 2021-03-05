@@ -6,6 +6,8 @@ pipeline {
 
         string(name: 'JAR_NAME', defaultValue:'calculadora', description:'Name of the .jar file')
 
+        integer(name: 'BUILD_NUMBER', defaultValue: 1.0, description: 'Build Number')
+
         //string(name: 'CONTAINER_NAME', defaultValue: 'java-mvn', description:'Docker Container Name')
 
         //string(name: 'DOCKER_PORT', defaultValue: '3000', description:'Docker Container Host Port')
@@ -28,14 +30,7 @@ pipeline {
             sonarScanner('category-service')
         }
     }
-}
-            
-            //steps {
-              //withSonarQubeEnv('sonarqube') {
-                //sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://sonarqube:9000'
-            //}
-        //}
-        //}
+}      
 
         stage("store artifact on Nexus") {
             steps{
